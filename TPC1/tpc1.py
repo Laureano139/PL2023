@@ -39,7 +39,7 @@ def faixa_etaria_dist(pacientes):
     print(f"Idade minima: {idade_min} anos\nIdade maxima: {idade_max} anos\n")
     
     dist = {}
-    for i in range(idade_min, idade_max + 5, 5):
+    for i in range(0, idade_max + 1, 5):
         dist[f"{i}-{i+4}"] = {"Com_doenca": 0, "Sem_doenca": 0}
     
     for paciente in pacientes:
@@ -58,10 +58,11 @@ def faixa_etaria_dist(pacientes):
     print("Distribuicao da doenca por faixa etaria:\n")
     for faixa_etaria, contadores in dist.items():
         total = contadores["Com_doenca"] + contadores["Sem_doenca"]
+        percent_doente = 0
         if total > 0:
             percent_doente = contadores["Com_doenca"] / total * 100
         else:
-            return ("")
+            pass
         print(f"{faixa_etaria} anos: {percent_doente:.1f}% <---> {contadores['Com_doenca']} de {total} doentes.")
 
 #--------------------------------------------------------------------------------------------------------------------------------------#
@@ -70,7 +71,9 @@ def colesterol_dist(pacientes):
     print("--- DISTRIBUICAO POR COLESTEROL ---\n")
     colesterol_min = min(paciente["colesterol"] for paciente in pacientes)
     colesterol_max = max(paciente["colesterol"] for paciente in pacientes)
-    colesterol_max_intervalo = ((colesterol_max // 10) + 1) * 10
+    colesterol_max_intervalo = colesterol_max + (10 - (colesterol_max % 10))
+    if colesterol_max_intervalo > 610:
+        colesterol_max_intervalo = 610
     print(f'Colesterol minimo: {colesterol_min}\nColesterol maximo: {colesterol_max}\n')
 
     distr = {}
@@ -95,9 +98,9 @@ def colesterol_dist(pacientes):
         ttl = counters["Doentes"] + counters["Saudaveis"]
         if ttl > 0:
             percent = counters["Doentes"] / ttl * 100
+            print(f'Niveis de colesterol: {colesterol_niveis} -> {percent:.1f}%')
         else:
-            return ("")
-        print(f'Niveis de colesterol: {colesterol_niveis} -> {percent:.1f}%')
+            pass
 
 #--------------------------------------------------------------------------------------------------------------------------------------#
 
