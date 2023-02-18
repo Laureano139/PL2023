@@ -1,5 +1,4 @@
 
-from typing import List, Tuple, Union
 import re 
 
 def parse():
@@ -21,14 +20,29 @@ def parse():
 
 #--------------------------------------------------------------------------------------------------------------------------------------#
 
-def disease_dist(pacientes: list) -> str:
+def disease_dist(pacientes: list):
+    print("--- DISTRIBUICAO POR SEXO ---\n")
     dist = {'M': 0, 'F': 0}
     for paciente in pacientes:
         sexo = paciente["sexo"]
         doenca = paciente["temDoenca"]
         if doenca:
             dist[sexo] += 1
-    return f'M: {dist["M"]}, F: {dist["F"]}'
+    print(f'Informacao: \nM: {dist["M"]}, F: {dist["F"]}\n')
+    return dist
+    
+
+def disease_table(pacientes: list):
+    dist = disease_dist(pacientes)
+    print("Tabela da distribuicao por sexo:\n")
+    print("+-----------+--------------------------------+")
+    print("|    Sexo   | Número de pacientes com doença |")
+    print("+-----------+--------------------------------+")
+    print(f"| Masculino | {dist['M']:^30} |")
+    print("+-----------+--------------------------------+")
+    print(f"|  Feminino | {dist['F']:^30} |")
+    print("+-----------+--------------------------------+")
+    
 
 #--------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -64,6 +78,20 @@ def faixa_etaria_dist(pacientes):
         else:
             pass
         print(f"{faixa_etaria} anos: {percent_doente:.1f}% <---> {contadores['Com_doenca']} de {total} doentes.")
+        return dist
+    
+    
+def faixa_etaria_table(pacientes):
+    dist = faixa_etaria_dist(pacientes)
+    print("Tabela da distribuicao por faixa etaria:\n")
+    print("+------------+------------------------+-------------------------+")
+    print("| Faixa etaria | Doenças                | Sem doenças           |")
+    print("+------------+------------------------+-------------------------+")
+    for faixa_etaria, contadores in dist.items():
+        print(f"| {faixa_etaria:^11} | {contadores['Com_doenca']:^22} | {contadores['Sem_doenca']:^22} |")
+        print("+------------+------------------------+-------------------------+")
+    print()
+
 
 #--------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -101,6 +129,19 @@ def colesterol_dist(pacientes):
             print(f'Niveis de colesterol: {colesterol_niveis} -> {percent:.1f}%')
         else:
             pass
+    return distr
+
+def colesterol_table(pacientes):
+    distr = colesterol_dist(pacientes)
+    print("Tabela da distribuição da doença por níveis de colesterol:\n")
+    print("+----------------------+------------------------+------------------------+")
+    print("| Níveis de colesterol | Doenças                | Sem doenças            |")
+    print("+----------------------+------------------------+------------------------+")
+    for colesterol_niveis, contadores in distr.items():
+        print(f"| {colesterol_niveis:^20} | {contadores['Doentes']:^22} | {contadores['Saudaveis']:^22} |")
+        print("+----------------------+------------------------+------------------------+")
+    print()
+
 
 #--------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -118,6 +159,12 @@ print(faixa_etaria_data)
 
 colesterol_data = colesterol_dist(parsed_data)
 print(colesterol_data)
+
+table1_data = disease_table(parsed_data)
+
+table2_data = faixa_etaria_table(parsed_data)
+
+table3_data = colesterol_table(parsed_data)
 
 
     
