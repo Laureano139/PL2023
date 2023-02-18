@@ -32,11 +32,15 @@ def disease_dist(pacientes: list) -> str:
 #--------------------------------------------------------------------------------------------------------------------------------------#
 
 def faixa_etaria_dist(pacientes):
-    dist = {}
+    print("--- DISTRIBUICAO POR FAIXA ETARIA ---\n")
+    idade_min = min(paciente["idade"] for paciente in pacientes)
+    idade_max = max(paciente["idade"] for paciente in pacientes)
+    print(f"Idade minima: {idade_min} anos\nIdade maxima: {idade_max} anos\n")
     
-    for i in range(0, max(int(paciente["idade"]) for paciente in pacientes) + 5, 5):
+    dist = {}
+    for i in range(idade_min, idade_max + 5, 5):
         dist[f"{i}-{i+4}"] = {"Com_doenca": 0, "Sem_doenca": 0}
-
+    
     for paciente in pacientes:
         idade = paciente["idade"]
         tem_doenca = paciente["temDoenca"]
@@ -56,18 +60,61 @@ def faixa_etaria_dist(pacientes):
         if total > 0:
             percent_doente = contadores["Com_doenca"] / total * 100
         else:
-            return 0
-        print(f"{faixa_etaria}: {percent_doente:.1f}% <---> {contadores['Com_doenca']} de {total} doentes.")
+            return ("")
+        print(f"{faixa_etaria} anos: {percent_doente:.1f}% <---> {contadores['Com_doenca']} de {total} doentes.")
 
-#def colestrol_dist(pacientes):
+#--------------------------------------------------------------------------------------------------------------------------------------#
 
-# parsed_data = parse()
-# print(parsed_data)
+def colesterol_dist(pacientes):
+    print("--- DISTRIBUICAO POR COLESTEROL ---\n")
+    colesterol_min = min(paciente["colesterol"] for paciente in pacientes)
+    colesterol_max = max(paciente["colesterol"] for paciente in pacientes)
+    colesterol_max_intervalo = ((colesterol_max // 10) + 1) * 10
+    print(f'Colesterol minimo: {colesterol_min}\nColesterol maximo: {colesterol_max}\n')
 
-# disease_data = disease_dist(parsed_data)
-# print(disease_data)
+    distr = {}
+    for i in range(colesterol_min, colesterol_max_intervalo + 10, 10):
+        distr[f"{i}-{i+9}"] = {"Doentes": 0, "Saudaveis": 0}
 
-#faixa_etaria_dist(parse_csv())
+    for paciente in pacientes:
+        colesterol = paciente["colesterol"]
+        temDoenca = paciente["temDoenca"]
+        for colesterol_niveis, counters in distr.items():
+            limite_inf = int(colesterol_niveis.split("-")[0])
+            limite_sup = int(colesterol_niveis.split("-")[1])
+            if int(colesterol) >= limite_inf and int(colesterol) <= limite_sup:
+                if temDoenca:
+                    counters["Doentes"] += 1
+                else:
+                    counters["Saudaveis"] += 1
+                break
+
+    print("Distribuicao da doenca por niveis de colesterol:\n")
+    for colesterol_niveis, counters in distr.items():
+        ttl = counters["Doentes"] + counters["Saudaveis"]
+        if ttl > 0:
+            percent = counters["Doentes"] / ttl * 100
+        else:
+            return ("")
+        print(f'Niveis de colesterol: {colesterol_niveis} -> {percent:.1f}%')
+
+#--------------------------------------------------------------------------------------------------------------------------------------#
+
+
+
+#--------------------------------------------------------------------------------------------------------------------------------------#
+
+parsed_data = parse()
+
+disease_data = disease_dist(parsed_data)
+print(disease_data)
+
+faixa_etaria_data = faixa_etaria_dist(parsed_data)
+print(faixa_etaria_data)
+
+colesterol_data = colesterol_dist(parsed_data)
+print(colesterol_data)
+
 
     
         
