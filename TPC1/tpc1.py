@@ -142,7 +142,7 @@ def colesterol_table(pacientes):
     print("--- DISTRIBUICAO POR COLESTEROL ---\n")
     print("Tabela da distribuição da doença por níveis de colesterol:\n")
     print("+----------------------+------------------------+------------------------+")
-    print("| Níveis de colesterol | Doenças                | Sem doenças            |")
+    print("| Níveis de colesterol |        Doenças         |       Sem doenças      |")
     print("+----------------------+------------------------+------------------------+")
     for colesterol_niveis, contadores in distr.items():
         print(f"| {colesterol_niveis:^20} | {contadores['Doentes']:^22} | {contadores['Saudaveis']:^22} |")
