@@ -1,11 +1,21 @@
 
+print("\n\n")
+print("//-------- TPC 2 --------//")
+print("//---                 ---//")
+print("\n")
+
+print(">> Afonso Amorim")
+print(">> a97569")
+print("\n")
+
+
 paradoNoBailao = False
 soma = 0
 x = ''
 
 usr_input = input("Insira o input -> ")
 
-while usr_input != "":
+while not usr_input == "":
     
     if ("on" == usr_input.lower()):
         paradoNoBailao = False
