@@ -2,29 +2,31 @@
 import os
 
 def limpar_terminal():
-
-    clear_sequence = "\x1b[2J\x1b[;H"
     
     os.system('cls' if os.name == 'nt' else 'clear')
-    print(clear_sequence, end='')
     
 limpar_terminal()
 
-print("\n")
-print("//-------- TPC 2 --------//")
-print("//---                 ---//")
-print("\n")
+def init_page():
+    print("\n")
+    print("//-------- TPC 2 --------//")
+    print("//---                 ---//")
+    print("\n")
 
-print(">> Afonso Amorim")
-print(">> a97569")
-print("\n")
+    print(">> Afonso Amorim")
+    print(">> a97569")
+    print("\n")
+    
+    print("\nPara ajuda e contexto da aplicação, use o comando 'help'\n\n"
+      "Para comandos extra use o comando 'comandos'\n")
+    
+init_page()
 
 paradoNoBailao = False
 soma = 0
 x = ''
 
-print("\nPara ajuda e contexto da aplicação, use o comando 'help'\n\n"
-      "Para comandos extra use o comando 'comandos'\n")
+
 
 usr_input = input("Insira o input -> ")
 
@@ -43,12 +45,12 @@ while not usr_input == "":
     if ("comandos" == usr_input.lower()):
         print("\n---------- Comandos ----------\n"
               "help -> Descrição do funcionamento da aplicação;\n"
-              "limpar -> Limpar interface da aplicação, resetando todos os resultados previamente apresentados;"
-              "ATENÇÃO -> COMANDO 'limpar' ELIMINA TODOS OS RESULTADOS PRÉVIOS! COMEÇA TUDO DO ZERO DE NOVO!\n")
+              "restart -> Limpar interface da aplicação, resetando todos os resultados previamente apresentados;\n"
+              "ATENÇÃO -> COMANDO 'restart' ELIMINA TODOS OS RESULTADOS PRÉVIOS! COMEÇA TUDO DO ZERO DE NOVO!\n")
     
-    if ("on" == usr_input.lower()):
+    if ("on" in usr_input.lower()):
         paradoNoBailao = False
-    elif ("off" == usr_input.lower()):
+    elif ("off" in usr_input.lower()):
         paradoNoBailao = True
     elif ('=' in usr_input):
         print(soma)
@@ -58,6 +60,7 @@ while not usr_input == "":
         
         while i < len(usr_input):
             x = usr_input[i]
+            
             while i < len(usr_input) and x.isdigit():
                 n += x 
                 i += 1
@@ -70,8 +73,9 @@ while not usr_input == "":
                 
             i += 1
         
-    if ("limpar" == usr_input.lower()):
+    if ("restart" == usr_input.lower()):
         limpar_terminal()
+        init_page()
         soma = 0
                     
     usr_input = input("Insira o input -> ")
