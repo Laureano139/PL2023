@@ -9,9 +9,9 @@ limpar_terminal()
 
 def init_page():
     print("\n")
-    print("//-------- TPC 2 --------//")
-    print("//---                 ---//")
-    print("\n")
+    print("//--------  TPC 2  --------//")
+    print("//---                   ---//")
+    print("//---  SOMADOR ON/OFF  ----//\n")
 
     print(">> Afonso Amorim")
     print(">> a97569")
