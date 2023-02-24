@@ -26,8 +26,6 @@ paradoNoBailao = False
 soma = 0
 x = ''
 
-
-
 usr_input = input("Insira o input -> ")
 
 while not usr_input == "":
@@ -52,12 +50,12 @@ while not usr_input == "":
         paradoNoBailao = False
     elif ("off" in usr_input.lower()):
         paradoNoBailao = True
-    elif ('=' in usr_input):
-        print(soma)
-    elif paradoNoBailao == False:
+
+    if paradoNoBailao == False:
+    
         n = ""
         i = 0
-        
+            
         while i < len(usr_input):
             x = usr_input[i]
             
@@ -71,8 +69,17 @@ while not usr_input == "":
                 soma += int(n)
                 n = ""
                 
+            if "off" in usr_input.lower():
+                paradoNoBailao = True
+                
+            if "on" in usr_input.lower():
+                paradoNoBailao = False
+            
             i += 1
-        
+            
+        if "=" in usr_input:
+            print(soma)
+           
     if ("restart" == usr_input.lower()):
         limpar_terminal()
         init_page()
