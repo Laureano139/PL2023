@@ -76,6 +76,15 @@ def nomes_por_seculo(lista):
         ano = int(processo["data"].split('-')[0])
         seculo = (ano - 1) // 100 + 1
         
+        #* Com Regex
+        # 
+        # data = re.search(":(\d{4})-", linha)
+        #    if data is not None:
+        #        ano = int(data.group(1))
+        #        seculo = (ano - 1) // 100 + 1
+        # 
+        #*#
+        
         nome_completo = processo['nome']
         primeiro_nome = regex_primeiro_nome.search(nome_completo).group()
         ultimo_nome = regex_ultimo_nome.search(nome_completo).group()
@@ -156,10 +165,6 @@ def freq_relacoes(lista):
 
 
 def registos_json():
-    
-    print("|--------------------------------|")
-    print("|-----------ALINEA (D)-----------|")
-    print("|--------------------------------|")
     
     with open('processos.txt', 'r', encoding='utf8') as f:
 
