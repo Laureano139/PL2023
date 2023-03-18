@@ -6,6 +6,7 @@ file = sys.argv[1]
 listJson = []
 fPattern= re.compile(r"(?P<Numero>[^,]+),(?P<Nome>[^,]+),(?P<Curso>[^,]+),?(?P<Notas>[^{,]+)?(?P<Int>\{\d(?:,\d)?\})?(?:::)?(?P<Agreg>[^,]+)?")
 with open(file,'r') as fileObj:
+     
     dicT = {}
     primeiraLinha = fileObj.readline()[:-1]
     cabecalho = (fPattern.match(primeiraLinha).groupdict())
@@ -69,7 +70,7 @@ with open(file,'r') as fileObj:
         dicT = {}
         listSum = []
 
-
 print(listJson)
 with open("data.json", "w") as outfile:
     json.dump(listJson,outfile,indent=4, ensure_ascii = False)
+ 
