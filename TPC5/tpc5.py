@@ -2,6 +2,15 @@
 import ply.lex as lex 
 import re 
 
+
+print("\n")
+print("//-----------  TPC 5  -----------//")
+print("//------                   ------//")
+print("//----  CABINE TELEFÓNICA  ----//\n")
+print(">>> Afonso Amorim")
+print(">>> a97569")
+print("\n")
+
 tokens = (
     "LEVANTAR",
     "POUSAR",
