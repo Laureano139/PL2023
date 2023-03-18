@@ -26,23 +26,23 @@ sABORTAR = r"ABORTAR"
 money = 0
 estado = 0 # 0 se telefone pousado || 1 se telefone levantado || 2 se for para abortar
 
-def sMOEDA(s):
+def sMOEDA(t):
     reg = re.compile(r"MOEDA\s((\w+\,?\s?)+)")
-    match = re.match(reg, s.value)
-    s.value = match.group(1)
-    return s
+    match = re.match(reg, t.value)
+    t.value = match.group(1)
+    return t
 
-def sCONTACTO(s):
+def t_CONTACTO(t):
     rdigits = re.compile(r"T\=(\d{9})")
-    match = re.match(rdigits, s.value)
-    s.value = match.group(1)
-    return s
+    match = re.match(rdigits, t.value)
+    t.value = match.group(1)
+    return t
 
-def sError(s):
+def t_error(t):
     print("Erro")
-    s.lexer.skip(1)
+    t.lexer.skip(1)
     
-def sWS(s):
+def t_ws(t):
     r"\s+"
     pass
 
